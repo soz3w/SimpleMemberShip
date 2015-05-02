@@ -19,13 +19,18 @@ namespace SimpleMemberShip.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(Login loginData )
+        public ActionResult Login(Login loginData, string ReturnUrl)
         {
            // return Content(loginData.Username + ' ' + loginData.Password);
             if (ModelState.IsValid)
             {
                 if(WebSecurity.Login(loginData.Username, loginData.Password))
                 {
+                    if (ReturnUrl!=null)
+                    {
+                        return Redirect(ReturnUrl);
+                    }
+                    
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -46,13 +51,14 @@ namespace SimpleMemberShip.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(Register registerData)
+        public ActionResult Register(Register registerData,string userRole)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
                     WebSecurity.CreateUserAndAccount(registerData.Username, registerData.Password);
+                    Roles.AddUserToRole(registerData.Username, userRole);
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException)

@@ -23,16 +23,28 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (User.Identity.IsAuthenticated)
                     {
-                        <li><strong class="text-success">@User.Identity.Name</strong></li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                        <li>
+                            <strong class="text-success">@User.Identity.Name.ToUpper()</strong>
+                            @{
+                                if (Roles.GetRolesForUser().Length>0)
+                                {                          
+                                 <strong class="text-info">|@Roles.GetRolesForUser()[0]</strong>
+                                }
+                              }
+                            </li>
+                       
                     }
+                    
                     else
                     {
                         <li>@Html.ActionLink("Login", "Login", "Account")</li>
                         <li>@Html.ActionLink("Register", "Register", "Account")</li>
                     }
-                    
-                   
+
+
                 </ul>
             </div>
         </div>
