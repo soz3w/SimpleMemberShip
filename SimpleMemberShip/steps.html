@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Steps</title>
+</head>
+<body>
+    <ul>
+        <li>Create Acccoutn controller</li>
+        <li>Add Reference: extensions:search webmatrix, select the two</li>
+        <li>modify property of webmatrix data and web matrix webdata, copy local : true</li>
+        <li>set modification in web.config
+            <ul>
+                <li>
+                    <membership defaultprovider="SimpleMemberShipProvider">
+                        <providers>
+                            <clear />
+                            <add name="SimpleMemberShipProvider" type="WebMatrix.Webdata.SimpleMembershipProvider,WebMatrix.WebData" />
+                        </providers>
+                    </membership>
+                    <rolemanager enabled="true" />
+                </li>
+            </ul>
+        </li>
+       
+        <li>create a new database in management studio</li>
+        <li>create the connection to the database within visual studio</li>
+        <li>Copy the connectionstring property and use to create a connectionstring in web.config :
+            <connectionstrings>
+            <add name="DefaultConnection" connectionstring="Data Source=Saadna-tosh\SQLEXPRESS;Initial Catalog=SimpleMemberShip;Integrated Security=True" providername="System.Data.SqlClient" />
+            </connectionstrings>
+        </li>
+        <li>Register the webSeccurity in global.asax :
+            WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "Username", true);
+        </li>
+        <li>Install-Package Microsoft.AspNet.WebHelpers -Source nuget.org</li>
+        <li>Install-Package Microsoft.AspNet.WebPages.Data -Source nuget.org<</li>
+        <li>build and run, the tables normally will be created</li>
+
+        <li>create class model Login with username and password</li>
+        <li>create the view,empty view, add using to the namespace, set model as class login, .. etc</li>
+        <li>create class model Register with username and password</li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+</html>
